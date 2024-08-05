@@ -23,4 +23,14 @@ function tokenValidation(req, res, next) {
   }
 }
 
-module.exports = tokenValidation
+function adminValidation(req, res, next) {
+
+  if (req.payload.role === "admin") {
+    next() // continua con la ruta
+  } else {
+    res.status(401).json({ errorMessage: "No puedes acceder porque no eres admin" })
+  }
+
+}
+
+module.exports = { tokenValidation, adminValidation }

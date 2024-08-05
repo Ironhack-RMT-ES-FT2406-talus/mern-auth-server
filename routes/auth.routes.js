@@ -5,7 +5,7 @@ const User = require("../models/User.model");
 
 const router = require("express").Router();
 
-const tokenValidation = require("../middlewares/auth.middlewares")
+const {tokenValidation} = require("../middlewares/auth.middlewares")
 
 // POST "/api/auth/signup" => registrar el usuario (CREAR EL DOCUMENTO DE USUARIO)
 router.post("/signup", async (req, res, next) => {
@@ -87,6 +87,7 @@ router.post("/login", async (req, res, next) => {
       _id: foundUser._id,
       email: foundUser.email,
       // cualquier valor estatico del usuario deberia ir aqui (roles, username)
+      role: foundUser.role
     }
 
     const authToken = jwt.sign(
